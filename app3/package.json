@@ -1,0 +1,13 @@
+{
+    "name": "docker_web_app_3",
+    "version": "1.0.0",
+    "description": "Node.js/Express web app",
+    "author": "Milton Lima <milton.lima@outlook.com>",
+    "license": "MIT",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "express": "^4.16.3"
+    }
+}
