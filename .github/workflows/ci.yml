@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+  workflow_dispatch:
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get Current Pull Request
+        uses: 8BitJonny/gh-get-current-pr@1.0.1
+        id: pr
+        with:
+          github-token: $
+          filterOutClosed: true
+
+      - id: file_changes
+        name: File Changes
+        uses: trilom/file-changes-action@v1.2.3
+        with:
+          prNumber: $
+          pushBefore: ''
+          pushAfter: ''
+
+      - name: Output
+        run: echo '$'
+        id: output
+        with:
+          prNumber: $
+          pushBefore: ''
+          pushAfter: ''
+      
+      - name: Output File Changes
+        run: echo '$'
+
+      - name: Run app1 "build"
+        if: contains(steps.file_changes.output, 'app1/')
+        run: echo Run app1
+
+      - name: Run app2 "build"
+        if: contains(steps.file_changes.output, 'app2/')
+        run: echo Run app1
+
+      - name: Run app3 "build"
+        if: contains(steps.file_changes.output, 'app3/')
+        run: echo Run app1
